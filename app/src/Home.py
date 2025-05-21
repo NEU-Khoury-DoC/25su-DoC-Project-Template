@@ -34,7 +34,7 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('European Parliament Party Loyalty and Cohesion Analysis')
+st.title('Trayna\'s Version of the Parliment Loyalty App Thingys')
 st.write('\n\n')
 st.write('### 2025 Summer 1 Dialogue of Civilizations')
 st.write('\n')
