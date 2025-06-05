@@ -59,6 +59,7 @@ def create_app():
     app.register_blueprint(playground, url_prefix="/playground")
     app.register_blueprint(models, url_prefix="/models")
     app.register_blueprint(playground, url_prefix="/playground")
+    app.register_blueprint(models, url_prefix="/models")
 
     # Don't forget to return the app object
     return app
