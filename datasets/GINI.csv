@@ -1,0 +1,326 @@
+country,date,value
+Argentina,2024,
+Argentina,2023,
+Argentina,2022,0.40700000000000003
+Argentina,2021,0.424
+Argentina,2020,0.42700000000000005
+Argentina,2019,0.433
+Argentina,2018,0.41700000000000004
+Argentina,2017,0.414
+Argentina,2016,0.423
+Argentina,2015,
+Argentina,2014,0.418
+Argentina,2013,0.41100000000000003
+Argentina,2012,0.414
+Argentina,2011,0.42700000000000005
+Argentina,2010,0.43700000000000006
+Argentina,2009,0.43799999999999994
+Argentina,2008,0.45
+Argentina,2007,0.46299999999999997
+Argentina,2006,0.46399999999999997
+Argentina,2005,0.478
+Argentina,2004,0.485
+Argentina,2003,0.51
+Argentina,2002,0.5379999999999999
+Argentina,2001,0.5329999999999999
+Argentina,2000,0.51
+Argentina,1999,0.498
+Argentina,1998,0.507
+Argentina,1997,0.491
+Argentina,1996,0.495
+Argentina,1995,0.489
+Argentina,1994,0.45899999999999996
+Argentina,1993,0.44799999999999995
+Argentina,1992,0.455
+Argentina,1991,0.46799999999999997
+Argentina,1990,
+Argentina,1989,
+Argentina,1988,
+Argentina,1987,0.45299999999999996
+Argentina,1986,0.428
+Argentina,1985,
+Argentina,1984,
+Argentina,1983,
+Argentina,1982,
+Argentina,1981,
+Argentina,1980,0.408
+Argentina,1979,
+Argentina,1978,
+Argentina,1977,
+Argentina,1976,
+Argentina,1975,
+Argentina,1974,
+Argentina,1973,
+Argentina,1972,
+Argentina,1971,
+Argentina,1970,
+Argentina,1969,
+Argentina,1968,
+Argentina,1967,
+Argentina,1966,
+Argentina,1965,
+Argentina,1964,
+Argentina,1963,
+Argentina,1962,
+Argentina,1961,
+Argentina,1960,
+Brazil,2024,
+Brazil,2023,
+Brazil,2022,0.52
+Brazil,2021,0.529
+Brazil,2020,0.489
+Brazil,2019,0.535
+Brazil,2018,0.539
+Brazil,2017,0.5329999999999999
+Brazil,2016,0.534
+Brazil,2015,0.519
+Brazil,2014,0.52
+Brazil,2013,0.527
+Brazil,2012,0.534
+Brazil,2011,0.529
+Brazil,2010,
+Brazil,2009,0.537
+Brazil,2008,0.54
+Brazil,2007,0.5489999999999999
+Brazil,2006,0.556
+Brazil,2005,0.563
+Brazil,2004,0.565
+Brazil,2003,0.5760000000000001
+Brazil,2002,0.581
+Brazil,2001,0.584
+Brazil,2000,
+Brazil,1999,0.59
+Brazil,1998,0.596
+Brazil,1997,0.598
+Brazil,1996,0.598
+Brazil,1995,0.595
+Brazil,1994,
+Brazil,1993,0.601
+Brazil,1992,0.531
+Brazil,1991,
+Brazil,1990,0.604
+Brazil,1989,0.632
+Brazil,1988,0.614
+Brazil,1987,0.596
+Brazil,1986,0.584
+Brazil,1985,0.555
+Brazil,1984,0.583
+Brazil,1983,0.589
+Brazil,1982,0.584
+Brazil,1981,0.579
+Brazil,1980,
+Brazil,1979,
+Brazil,1978,
+Brazil,1977,
+Brazil,1976,
+Brazil,1975,
+Brazil,1974,
+Brazil,1973,
+Brazil,1972,
+Brazil,1971,
+Brazil,1970,
+Brazil,1969,
+Brazil,1968,
+Brazil,1967,
+Brazil,1966,
+Brazil,1965,
+Brazil,1964,
+Brazil,1963,
+Brazil,1962,
+Brazil,1961,
+Brazil,1960,
+Germany,2024,
+Germany,2023,
+Germany,2022,
+Germany,2021,
+Germany,2020,0.324
+Germany,2019,0.318
+Germany,2018,0.319
+Germany,2017,0.313
+Germany,2016,0.314
+Germany,2015,0.317
+Germany,2014,0.308
+Germany,2013,0.315
+Germany,2012,0.311
+Germany,2011,0.306
+Germany,2010,0.302
+Germany,2009,0.305
+Germany,2008,0.308
+Germany,2007,0.312
+Germany,2006,0.31
+Germany,2005,0.317
+Germany,2004,0.302
+Germany,2003,0.298
+Germany,2002,0.298
+Germany,2001,0.299
+Germany,2000,0.289
+Germany,1999,0.29
+Germany,1998,0.28300000000000003
+Germany,1997,0.282
+Germany,1996,0.28
+Germany,1995,0.28800000000000003
+Germany,1994,0.292
+Germany,1993,0.28600000000000003
+Germany,1992,0.29100000000000004
+Germany,1991,0.295
+Germany,1990,
+Germany,1989,
+Germany,1988,
+Germany,1987,
+Germany,1986,
+Germany,1985,
+Germany,1984,
+Germany,1983,
+Germany,1982,
+Germany,1981,
+Germany,1980,
+Germany,1979,
+Germany,1978,
+Germany,1977,
+Germany,1976,
+Germany,1975,
+Germany,1974,
+Germany,1973,
+Germany,1972,
+Germany,1971,
+Germany,1970,
+Germany,1969,
+Germany,1968,
+Germany,1967,
+Germany,1966,
+Germany,1965,
+Germany,1964,
+Germany,1963,
+Germany,1962,
+Germany,1961,
+Germany,1960,
+United Kingdom,2024,
+United Kingdom,2023,
+United Kingdom,2022,
+United Kingdom,2021,0.324
+United Kingdom,2020,0.326
+United Kingdom,2019,0.32799999999999996
+United Kingdom,2018,0.337
+United Kingdom,2017,0.326
+United Kingdom,2016,0.331
+United Kingdom,2015,0.33299999999999996
+United Kingdom,2014,0.331
+United Kingdom,2013,0.327
+United Kingdom,2012,0.331
+United Kingdom,2011,0.332
+United Kingdom,2010,0.337
+United Kingdom,2009,0.35100000000000003
+United Kingdom,2008,0.354
+United Kingdom,2007,0.344
+United Kingdom,2006,0.359
+United Kingdom,2005,0.355
+United Kingdom,2004,0.348
+United Kingdom,2003,0.349
+United Kingdom,2002,0.35100000000000003
+United Kingdom,2001,0.371
+United Kingdom,2000,0.38799999999999996
+United Kingdom,1999,0.368
+United Kingdom,1998,0.366
+United Kingdom,1997,0.35700000000000004
+United Kingdom,1996,0.353
+United Kingdom,1995,0.355
+United Kingdom,1994,0.36
+United Kingdom,1993,0.35100000000000003
+United Kingdom,1992,0.35
+United Kingdom,1991,0.35
+United Kingdom,1990,0.35700000000000004
+United Kingdom,1989,0.33399999999999996
+United Kingdom,1988,0.34299999999999997
+United Kingdom,1987,0.33899999999999997
+United Kingdom,1986,0.319
+United Kingdom,1985,0.304
+United Kingdom,1984,0.292
+United Kingdom,1983,0.298
+United Kingdom,1982,0.299
+United Kingdom,1981,0.297
+United Kingdom,1980,0.285
+United Kingdom,1979,0.27399999999999997
+United Kingdom,1978,0.272
+United Kingdom,1977,0.271
+United Kingdom,1976,0.276
+United Kingdom,1975,0.27899999999999997
+United Kingdom,1974,0.29
+United Kingdom,1973,0.28800000000000003
+United Kingdom,1972,0.28800000000000003
+United Kingdom,1971,0.293
+United Kingdom,1970,0.28
+United Kingdom,1969,0.27899999999999997
+United Kingdom,1968,0.268
+United Kingdom,1967,
+United Kingdom,1966,
+United Kingdom,1965,
+United Kingdom,1964,
+United Kingdom,1963,
+United Kingdom,1962,
+United Kingdom,1961,
+United Kingdom,1960,
+United States,2024,
+United States,2023,
+United States,2022,0.413
+United States,2021,0.397
+United States,2020,0.397
+United States,2019,0.415
+United States,2018,0.414
+United States,2017,0.41200000000000003
+United States,2016,0.41100000000000003
+United States,2015,0.41200000000000003
+United States,2014,0.415
+United States,2013,0.406
+United States,2012,0.409
+United States,2011,0.409
+United States,2010,0.4
+United States,2009,0.406
+United States,2008,0.408
+United States,2007,0.408
+United States,2006,0.414
+United States,2005,0.41
+United States,2004,0.40299999999999997
+United States,2003,0.408
+United States,2002,0.40399999999999997
+United States,2001,0.406
+United States,2000,0.401
+United States,1999,0.4
+United States,1998,0.4
+United States,1997,0.405
+United States,1996,0.40299999999999997
+United States,1995,0.39899999999999997
+United States,1994,0.4
+United States,1993,0.40399999999999997
+United States,1992,0.384
+United States,1991,0.38
+United States,1990,0.38299999999999995
+United States,1989,0.382
+United States,1988,0.377
+United States,1987,0.37200000000000005
+United States,1986,0.376
+United States,1985,0.376
+United States,1984,0.373
+United States,1983,0.373
+United States,1982,0.36700000000000005
+United States,1981,0.355
+United States,1980,0.34700000000000003
+United States,1979,0.348
+United States,1978,0.348
+United States,1977,0.355
+United States,1976,0.35600000000000004
+United States,1975,0.35600000000000004
+United States,1974,0.355
+United States,1973,0.361
+United States,1972,0.36700000000000005
+United States,1971,0.369
+United States,1970,0.366
+United States,1969,0.36
+United States,1968,0.363
+United States,1967,0.369
+United States,1966,0.37799999999999995
+United States,1965,0.375
+United States,1964,0.381
+United States,1963,0.376
+United States,1962,
+United States,1961,
+United States,1960,
