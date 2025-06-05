@@ -34,14 +34,11 @@ describe = X_df.describe().loc[['mean', 'std']].to_numpy()
 
 X = np.array([78.699997,28.0,0.0734319847255705,0.0631525528524754,0.0057497428086187,0.0025634702523358,5.1075,5.825,8895960.0,27259.4806735435,2.40595834145438,0,1,0,0])
 
-def predict_gini(X, describe, model='logistic'):
-    weights_df = pd.read_csv('ml-src/model_weights.csv')
+def predict_gini(X, describe, weights, model='logistic'):
     X = np.hstack([[(X[i] - describe[0,i]) / describe[1,i] for i in range(len(X)-4)], X[-4:]])
     if model == 'linear':
-        weights = weights_df.iloc[0,2:].to_numpy()
         gini = np.dot(X, weights)
     elif model == 'logistic':
-        weights = weights_df.iloc[1,2:].to_numpy()
         gini = 1 / (1 + np.exp(-np.dot(X, weights)))
     return gini
 

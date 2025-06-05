@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, current_app
 from backend.db_connection import db
 from mysql.connector import Error
 
-# Create a Blueprint for NGO routes
+# Create a Blueprint for post utils routes
 post_utils = Blueprint("post_utils", __name__)
 
 # PUT request to add an upvote to a post
