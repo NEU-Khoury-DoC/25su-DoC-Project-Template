@@ -10,6 +10,7 @@ from backend.ngos.ngo_routes import ngos
 from backend.landing.landing_routes import landing
 from backend.post_utils.post_utils import post_utils
 from backend.feed.feed_routes import feed
+from backend.playground.playground import playground
 from backend.models.models_routes import models
 
 def create_app():
@@ -55,6 +56,7 @@ def create_app():
     app.register_blueprint(post_utils, url_prefix="/post_utils") # making this deliberately stupid to test underscores and dashes functionality
     app.register_blueprint(feed, url_prefix="/feed")
     app.register_blueprint(models, url_prefix="/models")
+    app.register_blueprint(playground, url_prefix="/playground")
 
     # Don't forget to return the app object
     return app

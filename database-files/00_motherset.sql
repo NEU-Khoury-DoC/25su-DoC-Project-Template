@@ -47,7 +47,7 @@ CREATE TABLE Graphs (
 
 CREATE TABLE ModelWeights (
     ModelID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    ModelName STRING NOT NULL,
+    ModelName VARCHAR(25) NOT NULL,
     Population FLOAT NOT NULL,
     GDP_per_capita FLOAT NOT NULL,
     Trade_union_density FLOAT NOT NULL,
