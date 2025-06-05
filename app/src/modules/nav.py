@@ -63,6 +63,11 @@ def AdminPageNav():
         "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
     )
 
+def FeedNav():
+    st.sidebar.page_link("pages/00_Feed_Page.py", label="My Feed")
+
+def PlaygroundNav():
+    st.sidebar.page_link("pages/01_Playground.py", label="Data Playground")
 
 # --------------------------------Links Function -----------------------------------------------
 def SideBarLinks(show_home=False):
@@ -104,6 +109,7 @@ def SideBarLinks(show_home=False):
             AdminPageNav()
 
     # Always show the About page at the bottom of the list of links
+    PlaygroundNav()
     AboutPageNav()
 
     if st.session_state["authenticated"]:
