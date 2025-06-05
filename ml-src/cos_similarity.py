@@ -1,12 +1,21 @@
-"""
-model01.py is an example of how to access model parameter values that you are storing
-in the database and use them to make a prediction when a route associated with prediction is
-accessed. 
-"""
-from backend.db_connection import db
+# this model takes in input from the user in the form of sliders. 
+# The user will slide 4 different 'factors'.
+# Each country will be represented as a vector with the same factors.
+# the cosine similarity score will be used to compare the given slider input to all the countries
+
 import numpy as np
 import pandas as pd
-# import logging
+
+
+# reads in the CSV as df
+df_all_years = pd.read_csv('datasets/preprocessed-datasets/alldata_noinf.csv')
+
+# filters all data points that don't include a year of 2022
+recent = (df_all_years.year == 2022)
+df = df_all_years[recent]
+
+# healthcare, education, safety, environment, infrastructure -> mock input
+input = np.array([1, 1, 1, 1])
 
 def inv_sigmoid(value):
     """ returns the inverse sigmoid of the input. If the input is 0 or 1, rebounds the sigmoid to -3 or 3
@@ -22,6 +31,8 @@ def inv_sigmoid(value):
 
     return np.log(value) - np.log(1-value)
 
+
+
 def cosine_similarity(df, input_vector):
     """ returns a sorted dataframe of countries and their cosine similarity scores compared to the input vector.
         Args:
@@ -35,11 +46,11 @@ def cosine_similarity(df, input_vector):
     inv_sig_input = np.array(list(map(inv_sigmoid, input_vector)))
 
     for country in range(len(df)):
-        temp_vector = np.array([df.iloc[country, 2],
-                            df.iloc[country, 3],
-                            df.iloc[country, 4],
-                            df.iloc[country, 5]])
-        
+        temp_vector = np.array([df.iloc[country, 2], 
+                            df.iloc[country, 3], 
+                            df.iloc[country, 4], 
+                            df.iloc[country, 5],])
+        temp_vector = temp_vector/np.sum(temp_vector)
         cos_similarity = np.dot(inv_sig_input, temp_vector) / (np.linalg.norm(inv_sig_input) * np.linalg.norm(temp_vector))
 
         cos_scores.append(cos_similarity)
@@ -52,37 +63,4 @@ def cosine_similarity(df, input_vector):
     sorted_df_scores = df_scores.sort_values('similarity', ascending = False)
     return sorted_df_scores
 
-
-from flask import current_app
-
-def train():
-  """
-  You could have a function that performs training from scratch as well as testing (see below).
-  It could be activated from a route for an "administrator role" or something similar. 
-  """
-  return 'Training the model'
-
-def test():
-  return 'Testing the model'
-
-def predict(health_score, education_score, safety_score, environment_score):
-  """
-  Retreives model parameters from the database and uses them for real-time prediction
-  """
-  # get a database cursor 
-  cursor = db.get_db().cursor()
-  # get the model params from the database
-  query = 'SELECT country_name, health_score, education_score, safety_score, environment_score FROM ML_Score ' \
-  'WHERE score_year = 2022'
-  cursor.execute(query)
-  return_val = cursor.fetchall()
-
-  df = pd.DataFrame(return_val)
-
-  vector = np.array(health_score, education_score, safety_score, environment_score)
-
-  vector/np.sum(vector)
-
-  similarity_table = cosine_similarity(df, vector)
-
-  return similarity_table
+print(cosine_similarity(df, input))
