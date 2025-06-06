@@ -33,14 +33,14 @@ INSERT INTO Graphs (
     Region_Middle_East_and_North_Africa
 )
 VALUES
-    ('GDP per Capita', 0, 100000, 1000,
+    ('GDP_per_capita', 0, 100000, 1000,
      0, 0, 0, 0,
      0, 0, 0, 0,
      0, 0, 0, 0, 0,
      0,
      0, 0, 0, 0),
      
-    ('Unemployment Rate', 0, 50, 1,
+    ('Unemployment_rate', 0, 50, 1,
      0, 0, 0, 0,
      0, 0, 0, 0,
      0, 0, 0, 0, 0,

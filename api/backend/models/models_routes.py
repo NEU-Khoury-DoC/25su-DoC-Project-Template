@@ -12,34 +12,49 @@ models = Blueprint("models", __name__)
 def get_predictions(graphID):
     try:
         current_app.logger.info(f"Starting gini_plot request for GraphID {graphID}")
-        cursor = db.get_db().cursor(dictionary=True)
+        cursor = db.get_db().cursor()
 
         # get the graph row
-        cursor.execute("SELECT * FROM Graphs WHERE GraphID = %s", (graphID,))
+        cursor.execute("""SELECT XAxis, XMin, XMax, XStep, Population, GDP_per_capita, Trade_union_density, Corporate_tax_rate, Education, 
+                       Health, Housing, Community_development, IRLT, Unemployment_rate,
+                       Inflation, Region_East_Asia_and_Pacific, 
+                       Region_Europe_and_Central_Asia, Region_Latin_America_and_Caribbean, 
+                       Region_Middle_East_and_North_Africa  FROM Graphs WHERE GraphID = %s""", (graphID,))
         row = cursor.fetchone()
-        cursor.close()
+        current_app.logger.info(row)
 
         if row is None:
             return jsonify({"error": "Graph not found"}), 404
 
         # get weights of graph
-        cursor.execute("""SELECT Trade_union_density, Corporate_tax_rate, Education, 
+        cursor.execute("""SELECT Population, GDP_per_capita, Trade_union_density, Corporate_tax_rate, Education, 
                        Health, Housing, Community_development, IRLT, Unemployment_rate,
-                       Population, GDP_per_capita, Inflation, Region_East_Asia_and_Pacific, 
+                       Inflation, Region_East_Asia_and_Pacific, 
                        Region_Europe_and_Central_Asia, Region_Latin_America_and_Caribbean, 
                        Region_Middle_East_and_North_Africa 
                        FROM ModelWeights WHERE ModelName = 'Logistic Regression'""")
-        weights = cursor.fetchone()
+        weights = list(cursor.fetchone().values())
+        current_app.logger.info(weights)
 
         # get describe metrics
-        cursor.execute("SELECT * FROM PredictMetrics ORDER BY Statistic")
+        cursor.execute("""SELECT Population, GDP_per_capita, Trade_union_density, Corporate_tax_rate, Education, 
+                       Health, Housing, Community_development, IRLT, Unemployment_rate,
+                       Inflation, Region_East_Asia_and_Pacific, 
+                       Region_Europe_and_Central_Asia, Region_Latin_America_and_Caribbean, 
+                       Region_Middle_East_and_North_Africa  FROM PredictMetrics ORDER BY Metric""")
         rows = cursor.fetchall()
+        
 
-        columns = [col for col in rows[0].keys() if col != 'Statistic']
+        cursor.close()
+
+        columns = [col for col in rows[0].keys() if col != 'Metric']
 
         describe = [
             [row[col] for col in columns] for row in rows
             ]
+
+        current_app.logger.info("describe")
+        current_app.logger.info(describe)
 
         # get XAxis and range
         x_axis = row["XAxis"]
@@ -56,38 +71,31 @@ def get_predictions(graphID):
             x_input = row.copy()
 
             x_input[x_axis] = x_val
-
-            x_input.pop("GraphID", None)
+            
             x_input.pop("XAxis", None)
             x_input.pop("XMin", None)
             x_input.pop("XMax", None)
             x_input.pop("XStep", None)
+            current_app.logger.info(x_axis)
 
-            gini = predict_gini(x_input, describe=describe, weights=weights, model="logistic")
 
+            x_input = list(x_input.values())
+            current_app.logger.info(x_input)
+
+            current_app.logger.info(f"Predicting GINI for dfksdnfdnsfndsj points")
+            gini = predict_gini(np.array(x_input), describe=np.array(describe), weights=np.array(weights), model="logistic")
+
+            current_app.logger.info(f"Predicting FJDSOFJFJO for dfksdnfdnsfndsj points")
             gini_values.append(gini)
 
+        output = {}
+        output["predictions"] = gini_values
+        output["x_axis"] = x_axis
+        output["x_min"] = x_min
+        output["x_max"] = x_max
+        output["x_step"] = x_step
 
-        
-
-
-# put this in frontend. just format it
-        # fig = go.Figure(data=go.Scatter(
-        #     x=x_values,
-        #     y=gini_values,
-        #     mode='lines+markers',
-        #     name='GINI Prediction'
-        # ))
-
-        # fig.update_layout(
-        #     title=f"GINI vs {x_axis} (GraphID {graphID})",
-        #     xaxis_title=x_axis,
-        #     yaxis_title="Predicted GINI",
-        #     template="plotly_white"
-        # )
-
-        current_app.logger.info("Returning plot")
-        return jsonify({})
+        return jsonify(output)
 
     except Exception as e:
         current_app.logger.error(f"Error in gini_plot: {str(e)}")

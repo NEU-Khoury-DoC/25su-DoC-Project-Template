@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+from flask import Blueprint, jsonify, request, current_app
+
 # from models import log_regress
 # from models import lin_regress
 # from sklearn.model_selection import train_test_split
@@ -34,6 +36,11 @@ import pandas as pd
 # X = np.array([78.699997,28.0,0.0734319847255705,0.0631525528524754,0.0057497428086187,0.0025634702523358,5.1075,5.825,8895960.0,27259.4806735435,2.40595834145438,0,1,0,0])
 
 def predict_gini(X, describe, weights, model='logistic'):
+    current_app.logger.info(X.size)
+    current_app.logger.info(describe.size)
+    current_app.logger.info(weights.size)
+
+
     X = np.hstack([[(X[i] - describe[0,i]) / describe[1,i] for i in range(len(X)-4)], X[-4:]])
     if model == 'linear':
         gini = np.dot(X, weights)
