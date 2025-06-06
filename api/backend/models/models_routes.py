@@ -5,10 +5,10 @@ import numpy as np
 from backend.ml_models.logistic import predict_gini
 
 # Create a Blueprint for models routes
-models = Blueprint("post_utils", __name__)
+models = Blueprint("models", __name__)
 
 # GET request to get a plotly prediction graph
-@models.route("/models/<int: graphID>", methods=["GET"])
+@models.route("/predict/<int:graphID>", methods=["GET"])
 def get_predictions(graphID):
     try:
         current_app.logger.info(f"Starting gini_plot request for GraphID {graphID}")
