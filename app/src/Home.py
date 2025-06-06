@@ -26,54 +26,58 @@ st.session_state['authenticated'] = False
 # the links displayed on the left-side panel. 
 # IMPORTANT: ensure src/.streamlit/config.toml sets
 # showSidebarNavigation = false in the [client] section
-SideBarLinks(show_home=True)
+SideBarLinks()
 
 # ***************************************************
 #    The major content of this page
 # ***************************************************
 
-# set the title of the page and provide a simple prompt. 
-logger.info("Loading the Home page of the app")
-st.title('CS 4973 Sample DoC Project App')
-st.write('\n\n')
-st.write('### 2025 Summer 1 Dialogue of Civilizations')
-st.write('\n')
-st.write('#### HI! As which user would you like to log in?')
+# Create three columns for layout centering
+left, center, right = st.columns([1, 2, 1])
+
+with center:
+    # Use HTML to center-align text within the middle column
+    st.markdown("<h1 style='text-align: center;'>Open Port</h1>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>Find Your Safe Haven</h3>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'>HI! As which user would you like to log in?</h4>", unsafe_allow_html=True)
+
+# Close the div
+st.markdown('</div>', unsafe_allow_html=True)
 
 # For each of the user personas for which we are implementing
 # functionality, we put a button on the screen that the user 
 # can click to MIMIC logging in as that mock user. 
 
-if st.button("Act as John, a Political Strategy Advisor", 
+if st.button("Act as Mohammed, a 17 year old refugee from Syria ", 
             type = 'primary', 
             use_container_width=True):
     # when user clicks the button, they are now considered authenticated
     st.session_state['authenticated'] = True
     # we set the role of the current user
-    st.session_state['role'] = 'pol_strat_advisor'
+    st.session_state['role'] = 'asylum_seeker'
     # we add the first name of the user (so it can be displayed on 
     # subsequent pages). 
-    st.session_state['first_name'] = 'John'
+    st.session_state['first_name'] = 'Mohammed'
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
-    logger.info("Logging in as Political Strategy Advisor Persona")
-    st.switch_page('pages/00_Pol_Strat_Home.py')
+    logger.info("Logging in as Syrian Refugee Persona")
+    st.switch_page('pages/01_App_Prob_Stats.py')
 
-if st.button('Act as Mohammad, an USAID worker', 
+if st.button('Act as Mark, a German Lawyer', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
+
     st.switch_page('pages/10_USAID_Worker_Home.py')
 
-if st.button('Act as System Administrator', 
+if st.button('Act as Eric, An EU Diplomat', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Admin_Home.py')
-
-
+    st.session_state['role'] = 'diplomat'
+    st.session_state['first_name'] = 'Eric'
+    st.switch_page('pages/20_Diplomat_Home.py')
 
