@@ -225,7 +225,10 @@ if st.session_state.available_features is None:
             # Fallback to hardcoded features if backend is unavailable
             st.session_state.available_features = list(FEATURE_MAPPING.keys())
             st.warning("⚠️ Backend unavailable - using default features")
+#----------------------^^^^^^^^^^^^^^^^^^^^ Is this fetching of features from the backend necessary?
 
+
+# vvvvvvvvvvvvvvvv Very cool but do we need for rn 
 # Show current user info in sidebar
 with st.sidebar:
     st.markdown("### 👤 Current User")
@@ -429,7 +432,7 @@ with col3:
             # Generate fake data
             with st.spinner("Generating predictions..."):
                 x_values, y_values = generate_fake_gini_data(compare_feature, x_min, x_max, int(steps))
-                
+
                 # Store in session state
                 st.session_state.graph_data = {
                     'x_values': x_values,
