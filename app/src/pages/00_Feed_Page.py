@@ -6,13 +6,13 @@ import requests
 from modules.nav import SideBarLinks
 
 
-# Page setup
+# page setup
 st.set_page_config(layout='wide')
 
-# Sidebar
+# sidebar
 SideBarLinks()
 
-# Load user info from session
+# load user info from session
 user_id = st.session_state.get('UserID', None)
 if not user_id:
     st.error("No user logged in. Please return to home page and log in.")
