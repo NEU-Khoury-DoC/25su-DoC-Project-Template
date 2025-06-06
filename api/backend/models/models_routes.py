@@ -1,9 +1,8 @@
 from flask import Blueprint, jsonify, request, current_app
 from backend.db_connection import db
 from mysql.connector import Error
-import plotly.graph_objects as go
 import numpy as np
-from ml_src.predict import predict_gini
+from api.backend.ml_models.logistic import predict_gini
 
 # Create a Blueprint for models routes
 models = Blueprint("post_utils", __name__)
@@ -70,22 +69,26 @@ def get_predictions(graphID):
             gini_values.append(gini)
 
 
-        fig = go.Figure(data=go.Scatter(
-            x=x_values,
-            y=gini_values,
-            mode='lines+markers',
-            name='GINI Prediction'
-        ))
+        
 
-        fig.update_layout(
-            title=f"GINI vs {x_axis} (GraphID {graphID})",
-            xaxis_title=x_axis,
-            yaxis_title="Predicted GINI",
-            template="plotly_white"
-        )
+
+# put this in frontend. just format it
+        # fig = go.Figure(data=go.Scatter(
+        #     x=x_values,
+        #     y=gini_values,
+        #     mode='lines+markers',
+        #     name='GINI Prediction'
+        # ))
+
+        # fig.update_layout(
+        #     title=f"GINI vs {x_axis} (GraphID {graphID})",
+        #     xaxis_title=x_axis,
+        #     yaxis_title="Predicted GINI",
+        #     template="plotly_white"
+        # )
 
         current_app.logger.info("Returning plot")
-        return jsonify({"plot": fig.to_plotly_json()})
+        return jsonify({})
 
     except Exception as e:
         current_app.logger.error(f"Error in gini_plot: {str(e)}")
