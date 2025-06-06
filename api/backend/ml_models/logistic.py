@@ -1,5 +1,4 @@
 import numpy as np
-import math
 import pandas as pd
 from models import log_regress
 from models import lin_regress

@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, current_app
 from backend.db_connection import db
 from mysql.connector import Error
 import numpy as np
-from api.backend.ml_models.logistic import predict_gini
+from backend.ml_models.logistic import predict_gini
 
 # Create a Blueprint for models routes
 models = Blueprint("post_utils", __name__)
@@ -63,7 +63,6 @@ def get_predictions(graphID):
             x_input.pop("XMax", None)
             x_input.pop("XStep", None)
 
-            # Call predict_gini — assuming it takes a dict or pandas row
             gini = predict_gini(x_input, describe=describe, weights=weights, model="logistic")
 
             gini_values.append(gini)
