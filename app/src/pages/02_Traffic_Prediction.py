@@ -6,6 +6,7 @@ import pandas as pd
 import pydeck as pdk
 from urllib.error import URLError
 from modules.nav import SideBarLinks
+import plotly.express as px
 
 SideBarLinks()
 
@@ -102,3 +103,5 @@ except URLError as e:
     """
         % e.reason
     )
+
+
