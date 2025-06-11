@@ -65,7 +65,7 @@ if st.session_state.show_sim_country:
     df_renamed = df_sorted.rename(columns={'Country_input':'Country', 'similarity':'Similarity Score'})
 
     fig = px.choropleth(df_renamed, title="Map of Most similar Countries",scope='europe', locations='Country', locationmode='country names', color='Similarity Score', hover_data='Similarity Score')
-    st.plotly_chart(fig, use_container_width=True, sharing="streamlit", theme="streamlit")
+    st.plotly_chart(fig, use_container_width=True, theme="streamlit")
 
     st.write(df_renamed.iloc[1:,:])
 

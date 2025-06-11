@@ -51,9 +51,6 @@ def cosine_similarity(df, input_vector):
     sorted_df_scores = df_scores.sort_values('similarity', ascending = False)
     return sorted_df_scores
 
-
-
-
 def train():
   """
   You could have a function that performs training from scratch as well as testing (see below).
