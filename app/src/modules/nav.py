@@ -14,54 +14,58 @@ def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
 
-#### ------------------------ Examples for Role of pol_strat_advisor ------------------------
-def PolStratAdvHomeNav():
+#### ------------------------ Examples for Role of party_leader ------------------------
+def PartyLeaderHomeNav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py", label="Political Strategist Home", icon="👤"
+        "pages/00_Party_Leader_Home.py", label="Party Leader Home", icon="👤"
     )
 
 
-def WorldBankVizNav():
+def PartyRecommenderNav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py", label="World Bank Visualization", icon="🏦"
+        "pages/01_Party_Recommend.py", label="Party Recruitment Dashboard", icon="🧲"
     )
 
 
-def MapDemoNav():
-    st.sidebar.page_link("pages/02_Map_Demo.py", label="Map Demonstration", icon="🗺️")
+def PartyCohesionNav():
+    st.sidebar.page_link("pages/02_Cohesion_Monitor.py", label="Percent Dissent Predictor", icon="📈")
+
+def MEPWatchlistNav():
+    st.sidebar.page_link("pages/03_MEP_Watchlist.py", label="MEP Watchlist", icon="🔍")
 
 
-## ------------------------ Examples for Role of usaid_worker ------------------------
-def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
+## ------------------------ Examples for Role of political_journalist ------------------------
+def PoliticalJournalistHomeNav():
+    st.sidebar.page_link("pages/10_Political_Journalist_Home.py", label="Political Journalist Home", icon="👤")
+
+def LoyaltyRecordsNav():
+    st.sidebar.page_link("pages/11_MEP_Loyalty_Records.py", label="MEP Party Loyalty Records", icon="📄")
 
 
-def PredictionNav():
+def CohesionMonitorNav():
     st.sidebar.page_link(
-        "pages/11_Prediction.py", label="Regression Prediction", icon="📈"
-    )
+        "pages/12_Party_Cohesion_Monitor.py", label="Percent Dissent Predictor", icon="🖥️"
+)
 
-
-def ClassificationNav():
+def RecommenderNav():
     st.sidebar.page_link(
-        "pages/13_Classification.py", label="Classification Demo", icon="🌺"
-    )
+        "pages/13_Recommender.py", label= "Party Recomender", icon="📈"
+)
 
 
-def NgoDirectoryNav():
-    st.sidebar.page_link("pages/14_NGO_Directory.py", label="NGO Directory", icon="📁")
+#### ------------------------ citizen Role ------------------------
+def CitizenHomeNav():
+    st.sidebar.page_link("pages/20_Citizen_Home.py", label="Citizen", icon="🖥️")
 
+def MEPInfoNav():
+    st.sidebar.page_link("pages/21_MEP_Party_Info.py", label="MEP & Party Info", icon="🏢")
 
-def AddNgoNav():
-    st.sidebar.page_link("pages/15_Add_NGO.py", label="Add New NGO", icon="➕")
+def MEPComparisonNav():
+    st.sidebar.page_link("pages/22_MEP_Comparison.py", label="MEP Comparison", icon="🆚")
 
+def MEPMatchNav():
+    st.sidebar.page_link("pages/23_MEP_Match.py", label="MEP Matcher", icon="👥")
 
-#### ------------------------ System Admin Role ------------------------
-def AdminPageNav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -71,7 +75,7 @@ def SideBarLinks(show_home=False):
     """
 
     # add a logo to the sidebar always
-    st.sidebar.image("assets/logo.png", width=150)
+    st.sidebar.image("assets/our_logo.png", width=280)
 
     # If there is no logged in user, redirect to the Home (Landing) page
     if "authenticated" not in st.session_state:
@@ -86,22 +90,25 @@ def SideBarLinks(show_home=False):
     if st.session_state["authenticated"]:
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "pol_strat_advisor":
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
+        if st.session_state["role"] == "party_leader":
+            PartyLeaderHomeNav()
+            PartyRecommenderNav()
+            PartyCohesionNav()
+            MEPWatchlistNav()
 
         # If the user role is usaid worker, show the Api Testing page
-        if st.session_state["role"] == "usaid_worker":
-            PredictionNav()
-            ApiTestNav()
-            ClassificationNav()
-            NgoDirectoryNav()
-            AddNgoNav()
+        if st.session_state["role"] == "political_journalist":
+            PoliticalJournalistHomeNav()
+            LoyaltyRecordsNav()
+            CohesionMonitorNav()
+            RecommenderNav()
 
         # If the user is an administrator, give them access to the administrator pages
-        if st.session_state["role"] == "administrator":
-            AdminPageNav()
+        if st.session_state["role"] == "citizen":
+            CitizenHomeNav()
+            MEPInfoNav()
+            MEPComparisonNav()
+            MEPMatchNav()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()

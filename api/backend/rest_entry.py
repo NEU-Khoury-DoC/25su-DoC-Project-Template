@@ -1,12 +1,19 @@
-from flask import Flask
+from flask import Blueprint, jsonify, current_app, make_response, request, Flask
 from dotenv import load_dotenv
 import os
 import logging
 from logging.handlers import RotatingFileHandler
 
 from backend.db_connection import db
-from backend.simple.simple_routes import simple_routes
-from backend.ngos.ngo_routes import ngos
+from backend.routes.mep_routes.mep_routes import meps
+from backend.routes.users_routes.users_routes import users
+from backend.routes.party_routes.party_routes import parties
+from backend.routes.recommender_routes.recommendation_routes import recommendation
+from backend.routes.watchlist_routes.watchlist_routes import watchlists
+from backend.routes.recommender_routes.recommendation_bp_routes import recommender_bp
+from backend.routes.logreg_routes.logreg_routes import logreg_bp
+
+
 
 def create_app():
     app = Flask(__name__)
@@ -34,19 +41,22 @@ def create_app():
     app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("MYSQL_ROOT_PASSWORD").strip()
     app.config["MYSQL_DATABASE_HOST"] = os.getenv("DB_HOST").strip()
     app.config["MYSQL_DATABASE_PORT"] = int(os.getenv("DB_PORT").strip())
-    app.config["MYSQL_DATABASE_DB"] = os.getenv(
-        "DB_NAME"
-    ).strip()  # Change this to your DB name
+    app.config["MYSQL_DATABASE_DB"] = os.getenv("DB_NAME").strip()
 
     # Initialize the database object with the settings above.
     app.logger.info("current_app(): starting the database connection")
     db.init_app(app)
 
-    # Register the routes from each Blueprint with the app object
-    # and give a url prefix to each
+    # Route registering
     app.logger.info("create_app(): registering blueprints with Flask app object.")
-    app.register_blueprint(simple_routes)
-    app.register_blueprint(ngos, url_prefix="/ngo")
+    app.register_blueprint(meps, url_prefix="/m")
+    app.register_blueprint(users, url_prefix="/u")
+    app.register_blueprint(parties, url_prefix="/p")
+    app.register_blueprint(recommendation, url_prefix='/r')
+    app.register_blueprint(watchlists, url_prefix='/w')
+    app.register_blueprint(recommender_bp, url_prefix='/b')
+    app.register_blueprint(logreg_bp, url_prefix='/l')
+
 
     # Don't forget to return the app object
     return app

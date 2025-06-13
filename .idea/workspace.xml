@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a39f216e-e186-43fe-b4b2-559c7851dada" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/api/backend/routes/recommender_routes/recommendation_bp_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/backend/routes/recommender_routes/recommendation_bp_routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/pages/10_Political_Journalist_Home.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/pages/10_Political_Journalist_Home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/pages/13_Recommender.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/pages/13_Recommender.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2yQG07D9jTn7wMQKDRdtO7ebniW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "trayna-branch",
+    "last_opened_file_path": "/Users/Trayna",
+    "settings.editor.selected.configurable": "database.query.execution"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="model_data.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/database-files/model_data.sql" />
+      <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Database Script.model_data.sql" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a39f216e-e186-43fe-b4b2-559c7851dada" name="Changes" comment="" />
+      <created>1749759158276</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1749759158276</updated>
+    </task>
+    <servers />
+  </component>
+</project>
