@@ -3,19 +3,44 @@ from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
 
 SideBarLinks()
+from modules.style import style_sidebar
+style_sidebar()
 
-st.write("# About this App")
+st.write("# About Best Life")
 
 st.markdown(
     """
-    This is a demo app for Data and Software in International Government and Politics Dialogue 2025 Project Course.  
+    A country's quality of life provides essential insight into citizens' well-being and satisfaction with their standards of living. Rather than simply relying on a single statistic to determine a country's success, quality of life encapsulates a broader sense of how people feel about their experiences. This is typically based on several factors, and for our project we will be focusing on the following: Health, Education, Safety, and Environment.
 
-    The goal of this demo is to provide information on the tech stack 
-    being used as well as demo some of the features of the various platforms. 
+    Our application aims to provide decision-making assistance for users looking to improve their quality of life. By utilizing data about the quality of life in EU member states, we can recommend countries to prospective international students, help policymakers implement new legislation, and guide activists in their expansion efforts. 
 
-    Stay tuned for more information and features to come!
+    Best Life utilizes a combination of time series auto-regression and cosine similarity scoring in order to provide valuable insights to its users. The ultimate goal is to help users understand the factors that determine their quality of life and subsequently make informed decisions about moving, policy implementation, or providing aid.
     """
 )
+
+st.divider() 
+st.write("# Creators")
+
+cols = st.columns(4)
+
+people = [
+    {"photo": "assets/max.jpeg", "name": "Max Robinson", "info": "Computer Science and Mathematics at Northeastern University"},
+    {"photo": "assets/maya.jpeg", "name": "Maya Ellis", "info": "Data Science and Economics at Northeastern University"},
+    {"photo": "assets/aretim.jpeg", "name": "Areti Makropoulos", "info": "Computer Science at Northeastern University"},
+    {"photo": "assets/zoya.jpeg", "name": "Zoya Siddiqui", "info": "Data Science and Biochemistry at Northeastern University"}
+]
+
+for col, member in zip(cols, people):
+    with col:
+        st.image(member["photo"], width=200, caption=None)
+
+        st.markdown(f"**{member['name']}**")
+        st.markdown(
+            f"<p style='font-size: 0.85rem; color: #555; min-height: 80px'>{member['info']}</p>",
+            unsafe_allow_html=True
+        )
+
+st.divider()
 
 # Add a button to return to home page
 if st.button("Return to Home", type="primary"):
