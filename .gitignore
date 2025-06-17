@@ -4,4 +4,12 @@ __pycache__
 secrets/
 .env
 .env.local
-*/logs/*
+*/logs/*ml-src/master_votes_clean.csv
+ml-src/cleaned_master_votes.csv
+ml-src/mep_votes_json_final.csv
+ml-src/master_votes_clean.csv
+ml-src/cleaned_master_votes.csv
+ml-src/mep_votes_json_final.csv
+ml-src/master_votes_clean.csv
+ml-src/cleaned_master_votes.csv
+ml-src/mep_votes_json_final.csv

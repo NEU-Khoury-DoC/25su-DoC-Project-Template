@@ -14,7 +14,9 @@ showSidebarNavigation = false
 
 [theme]
 # Setting some basic config options related to the theme of the app
-base="light"
-primaryColor="#6550e6"
-font="monospace"
-
+base = "light"
+backgroundColor = "#f0f4fb"               # Soft pastel blue/gray (clean + modern)
+primaryColor = "#365fc7"                  # Classy blue for buttons
+secondaryBackgroundColor = "#a5c6f2"      # Rich navy for sidebar
+textColor = "#1b1c1e"                     # Dark charcoal text (not harsh black)
+font = "sans serif"

@@ -1,79 +1,139 @@
-##################################################
-# This is the main/entry-point file for the 
-# sample application for your project
-##################################################
-
-# Set up basic logging infrastructure
 import logging
-logging.basicConfig(format='%(filename)s:%(lineno)s:%(levelname)s -- %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# import the main streamlit library as well
-# as SideBarLinks function from src/modules folder
 import streamlit as st
+from PIL import Image
+import requests
+
 from modules.nav import SideBarLinks
 
-# streamlit supports reguarl and wide layout (how the controls
-# are organized/displayed on the screen).
-st.set_page_config(layout = 'wide')
+# Set layout to wide
+st.set_page_config(layout="wide")
 
-# If a user is at this page, we assume they are not 
-# authenticated.  So we change the 'authenticated' value
-# in the streamlit session_state to false. 
-st.session_state['authenticated'] = False
+# --- Add CSS for blue buttons ---
+st.markdown("""
+    <style>
+    html, body, [class*="css"] {
+        font-family: 'sans-serif' !important;
+        background-color: #f0f4fb;
+    }
+    .block-container {
+        padding: 3rem 5rem;
+    }
+    .stButton {
+        padding-top: 28px;  /* Adjust as needed */
+    }
+    .stButton>button {
+        background-color: #365fc7;
+        color: white;
+        padding: 0.3em 1.5em;
+        border-radius: 8px;
+        font-size: 16px;
+        width: 100%;
+    }
+    div.stButton > button:hover {
+        background-color: #264d99;
+        color: white;
+    }
+    </style>
+""", unsafe_allow_html=True)
+from modules.nav import SideBarLinks
 
-# Use the SideBarLinks function from src/modules/nav.py to control
-# the links displayed on the left-side panel. 
-# IMPORTANT: ensure src/.streamlit/config.toml sets
-# showSidebarNavigation = false in the [client] section
-SideBarLinks(show_home=True)
 
-# ***************************************************
-#    The major content of this page
-# ***************************************************
+@st.cache_data
+def get_all_party_leaders():
 
-# set the title of the page and provide a simple prompt. 
-logger.info("Loading the Home page of the app")
-st.title('CS 4973 Sample DoC Project App')
-st.write('\n\n')
-st.write('### 2025 Summer 1 Dialogue of Civilizations')
-st.write('\n')
-st.write('#### HI! As which user would you like to log in?')
+    response = requests.get("http://web-api:4000/u/users/role/1")
+    if response.status_code != 200:
+        st.error("Failed to access users")
+        st.stop()
 
-# For each of the user personas for which we are implementing
-# functionality, we put a button on the screen that the user 
-# can click to MIMIC logging in as that mock user. 
 
-if st.button("Act as John, a Political Strategy Advisor", 
-            type = 'primary', 
-            use_container_width=True):
-    # when user clicks the button, they are now considered authenticated
-    st.session_state['authenticated'] = True
-    # we set the role of the current user
-    st.session_state['role'] = 'pol_strat_advisor'
-    # we add the first name of the user (so it can be displayed on 
-    # subsequent pages). 
-    st.session_state['first_name'] = 'John'
-    # finally, we ask streamlit to switch to another page, in this case, the 
-    # landing page for this particular user type
-    logger.info("Logging in as Political Strategy Advisor Persona")
-    st.switch_page('pages/00_Pol_Strat_Home.py')
+    users = response.json()
 
-if st.button('Act as Mohammad, an USAID worker', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
-
-if st.button('Act as System Administrator', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Admin_Home.py')
+    return users
 
 
 
+@st.cache_data
+def get_all_political_journalists():
+    response = requests.get("http://web-api:4000/u/users/role/2")
+    if response.status_code != 200:
+        st.error("Failed to access users")
+        st.stop()
+
+
+    users = response.json()
+
+    return users
+
+
+@st.cache_data
+def get_all_citizens():
+    response = requests.get("http://web-api:4000/u/users/role/3")
+    if response.status_code != 200:
+        st.error("Failed to access users")
+        st.stop()
+
+
+    users = response.json()
+
+    return users
+
+SideBarLinks()
+
+
+pls = get_all_party_leaders()
+pjs = get_all_political_journalists()
+czs = get_all_citizens()
+
+# Hero Section Layout
+left, right = st.columns([2, 1], gap="large")
+
+with left:
+    st.markdown("## **Welcome to Loyalty Lines**")
+    st.markdown("*Track EU votes. Understand MEP loyalty.*")
+    
+    rows = st.columns([2, 1]) 
+    
+    with rows[0]:
+        pl_option = st.selectbox(
+            "Log in as a Party Leader",
+            [pl['firstName'] + " " + pl['lastName'] for pl in pls],
+            key = 0,
+        )
+        
+        pj_option = st.selectbox(
+            "Log in as a Political Journalist",
+            [pj['firstName'] + " " + pj['lastName'] for pj in pjs],
+            key = 1,
+        )
+        
+        cz_option = st.selectbox(
+            "Log in as a Citizen",
+            [cz['firstName'] + " " + cz['lastName'] for cz in czs],
+            key = 2,
+        )
+
+
+    with rows[1]:
+        if st.button("Log in", key=90, use_container_width=True):
+            st.session_state['authenticated'] = True
+            st.session_state['role'] = 'party_leader'
+            st.session_state['name'] = pl_option
+            st.switch_page("pages/00_Party_Leader_Home.py")
+
+        if st.button("Log in", key=91, use_container_width=True):
+            st.session_state['authenticated'] = True
+            st.session_state['role'] = 'political_journalist'
+            st.session_state['name'] = pl_option
+            st.switch_page("pages/10_Political_Journalist_Home.py")
+
+        if st.button("Log in", key=92, use_container_width=True):
+            st.session_state['authenticated'] = True
+            st.session_state['role'] = 'citizen'
+            st.session_state['name'] = cz_option
+            st.switch_page("pages/20_Citizen_Home.py")
+
+with right:
+    st.image("assets/blogo.png", width=400)
