@@ -13,6 +13,8 @@ logger = logging.getLogger(__name__)
 import streamlit as st
 from modules.nav import SideBarLinks
 
+import requests
+
 # streamlit supports reguarl and wide layout (how the controls
 # are organized/displayed on the screen).
 st.set_page_config(layout = 'wide')
@@ -27,6 +29,8 @@ st.session_state['authenticated'] = False
 # IMPORTANT: ensure src/.streamlit/config.toml sets
 # showSidebarNavigation = false in the [client] section
 SideBarLinks(show_home=True)
+from modules.style import style_sidebar
+style_sidebar()
 
 # ***************************************************
 #    The major content of this page
@@ -34,46 +38,126 @@ SideBarLinks(show_home=True)
 
 # set the title of the page and provide a simple prompt. 
 logger.info("Loading the Home page of the app")
-st.title('CS 4973 Sample DoC Project App')
-st.write('\n\n')
-st.write('### 2025 Summer 1 Dialogue of Civilizations')
-st.write('\n')
-st.write('#### HI! As which user would you like to log in?')
 
-# For each of the user personas for which we are implementing
-# functionality, we put a button on the screen that the user 
-# can click to MIMIC logging in as that mock user. 
+st.markdown("""
+<div style='text-align: center; color: #458bd1;'>
+    <h1 style='margin: 0; font-size: 4.5em;'>Best Life</h1>
+    <h2 style='margin: 10px 0 0 0; font-size: 2.5em;'>Improve your quality of life today.</h2>
+</div>
+""", unsafe_allow_html=True)
 
-if st.button("Act as John, a Political Strategy Advisor", 
-            type = 'primary', 
-            use_container_width=True):
-    # when user clicks the button, they are now considered authenticated
-    st.session_state['authenticated'] = True
-    # we set the role of the current user
-    st.session_state['role'] = 'pol_strat_advisor'
-    # we add the first name of the user (so it can be displayed on 
-    # subsequent pages). 
-    st.session_state['first_name'] = 'John'
-    # finally, we ask streamlit to switch to another page, in this case, the 
-    # landing page for this particular user type
-    logger.info("Logging in as Political Strategy Advisor Persona")
-    st.switch_page('pages/00_Pol_Strat_Home.py')
+st.divider()
 
-if st.button('Act as Mohammad, an USAID worker', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
-    st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/10_USAID_Worker_Home.py')
+st.write('### Choose a user:')
 
-if st.button('Act as System Administrator', 
-            type = 'primary', 
-            use_container_width=True):
-    st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
-    st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/20_Admin_Home.py')
+def get_users(role_name):
+    user_info_res = requests.get(f"http://web-api:4000/users/role/{role_name}")
+    if user_info_res.status_code != 200:
+         logger.error(f"Failed to get users for role_id {role_name}")
+         return []
+    
+    user_info = user_info_res.json()
+    user_map = {f"{user['first_name']} ({user['user_name']})": user for user in user_info}
+    return user_map
+      
 
+student_user_map = get_users("Student")
+policymaker_user_map = get_users("Policymaker")
+activist_user_map = get_users("Activist")
 
+st.write("#### Prospective University Student:")
+row1_col1, row1_col2 = st.columns([3, 1])
+with row1_col1:
+    grace_user = st.selectbox(
+        label='',
+        options=["Select username"] + list(student_user_map.keys()),
+        label_visibility='collapsed',
+        key='grace'
+    )
+with row1_col2:
+    if st.button('Login', use_container_width=True, key='login_grace'):
+        if grace_user == "Select username":
+            st.session_state['grace_warning'] = True
+        else:
+            selected_user = student_user_map[grace_user]
+            st.session_state['grace_warning'] = False
+            st.session_state['authenticated'] = True
+            st.session_state['role'] = 'Student'
+            st.session_state['role_ID'] = selected_user['role_ID']
+            st.session_state['user_name'] = selected_user['user_name']
+            st.session_state['user_ID'] = selected_user['user_ID']
+            st.session_state['first_name'] = selected_user['first_name']
+            logger.info("Logging in as University Student Persona")
+            st.switch_page('pages/00_University_Student_Home.py')
+    warning_grace = st.empty()
+    if st.session_state.get('grace_warning'):
+        warning_grace.markdown(
+            "<div style='color:#d33;font-size:0.9rem;'>Please select a student username.</div>",
+            unsafe_allow_html=True
+        )
 
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+
+st.write("#### Policymaker:")
+row2_col1, row2_col2 = st.columns([3, 1])
+with row2_col1:
+    james_user = st.selectbox(
+        label='',
+        options=["Select username"] + list(policymaker_user_map.keys()),
+        label_visibility='collapsed',
+        key='james'
+    )
+with row2_col2:
+    if st.button('Login', use_container_width=True, key='login_james'):
+        if james_user == "Select username":
+            st.session_state['james_warning'] = True
+        else:
+            selected_user = policymaker_user_map[james_user]
+            st.session_state['james_warning'] = False
+            st.session_state['authenticated'] = True
+            st.session_state['role'] = 'Policymaker'
+            st.session_state['role_ID'] = selected_user['role_ID']
+            st.session_state['user_name'] = selected_user['user_name']
+            st.session_state['user_ID'] = selected_user['user_ID']
+            st.session_state['first_name'] = selected_user['first_name']
+            logger.info("Logging in as Policymaker Persona")
+            st.switch_page('pages/10_Policymaker_Home.py')
+    warning_james = st.empty()
+    if st.session_state.get('james_warning'):
+        warning_james.markdown(
+            "<div style='color:#d33;font-size:0.9rem;'>Please select a policymaker username.</div>",
+            unsafe_allow_html=True
+        )
+
+st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
+
+st.write("#### Activist:")
+row3_col1, row3_col2 = st.columns([3, 1])
+with row3_col1:
+    faye_user = st.selectbox(
+        label='',
+        options=["Select username"] + list(activist_user_map.keys()),
+        label_visibility='collapsed',
+        key='faye'
+    )
+with row3_col2:
+    if st.button('Login', use_container_width=True, key='login_faye'):
+        if faye_user == "Select username":
+            st.session_state['faye_warning'] = True
+        else:
+            selected_user = activist_user_map[faye_user]
+            st.session_state['faye_warning'] = False
+            st.session_state['authenticated'] = True
+            st.session_state['role'] = 'Activist'
+            st.session_state['role_ID'] = selected_user['role_ID']
+            st.session_state['user_name'] = selected_user['user_name']
+            st.session_state['user_ID'] = selected_user['user_ID']
+            st.session_state['first_name'] = selected_user['first_name']
+            logger.info("Logging in as Activist Persona")
+            st.switch_page('pages/20_Activist_Home.py')
+    warning_faye = st.empty()
+    if st.session_state.get('faye_warning'):
+        warning_faye.markdown(
+            "<div style='color:#d33;font-size:0.9rem;'>Please select an activist username.</div>",
+            unsafe_allow_html=True
+        )
